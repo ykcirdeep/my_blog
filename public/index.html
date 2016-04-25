@@ -1,0 +1,24 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function()
+		{
+			function addUser(user)
+			{
+				$("#users_list").append("<tr><td>"+user.email+"</td><td>"+ user.password+"</tr>");
+			}
+			$.getJSON('/users',function(users){
+				$.each(users,function(){addUser(this);})
+			});
+			$("#add_user").submit(function(e){
+				$.post("/users",$(this).serialize(),addUser);
+				this.reset();
+				e.preventDefault();
+			});
+		});
+</script>
+<div style="margin-top:100px;margin-left: 100px;">
+	<div><form id="add_user"><input type="text" name="user[email]"><input type="password" name="user[password]"><input type="submit" value="Add"></form></div>
+	<table id="users_list" border="2" style="width:471px;">
+		<tr><td>Email</td><td>Password</td><td>Remove</td></tr>
+	</table>
+</div>

@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :comments, except: [:new, :edit]
   resources :posts, except: [:new, :edit]
   resources :users, except: [:new, :edit]
+  get :token, controller: 'application'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
